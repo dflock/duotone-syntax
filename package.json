@@ -9,7 +9,16 @@
   ],
   "repository": "https://github.com/simurai/duotone-syntax",
   "license": "MIT",
+  "main": "lib/main",
   "engines": {
     "atom": ">1.0.0"
+  },
+  "configSchema": {
+    "accentColor": {
+      "title": "Accent Color",
+      "description": "Change the accent color of this theme.",
+      "type": "color",
+      "default": "yellow"
+    }
   }
 }
