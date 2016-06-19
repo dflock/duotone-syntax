@@ -2,19 +2,26 @@
 
 .css {
   &.source {
-    .uno-4();
-  }
-  &.at-rule {
-    .uno-1();
-    .keyword.punctuation {
-      color: inherit;
-    }
+    .mono-4();
   }
   &.attribute-name {
     &.id,
     &.class,
     &.parent-selector {
-      .uno-1();
+      .mono-1();
     }
   }
+  &.function {
+    .uno-2();
+  }
+  &.punctuation.terminator {
+    .duo-3();
+  }
+  &.at-rule {
+    .mono-1();
+    .keyword.punctuation {
+      color: inherit;
+    }
+  }
+
 }

@@ -11,7 +11,10 @@
   "license": "MIT",
   "main": "lib/main",
   "engines": {
-    "atom": ">1.0.0"
+    "atom": ">1.9.0"
+  },
+  "dependencies": {
+    "chroma-js": "1.1.1"
   },
   "configSchema": {
     "accentColor": {

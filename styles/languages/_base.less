@@ -1,9 +1,14 @@
 // Language syntax highlighting
 
-.uno-1 { color: @uno-1; } // .... Strong
-.uno-2 { color: @uno-2; } // ...   |
-.uno-3 { color: @uno-3; } // ..    v
-.uno-4 { color: @uno-4; } // .    Weak
+.mono-1 { color: var(--mono-1); } // .... Strong
+.mono-2 { color: var(--mono-2); } // ...   |
+.mono-3 { color: var(--mono-3); } // ..    v
+.mono-4 { color: var(--mono-4); } // .    Weak
+
+.uno-1 { color: var(--uno-1); } // .... Strong
+.uno-2 { color: var(--uno-2); } // ...   |
+.uno-3 { color: var(--uno-3); } // ..    v
+.uno-4 { color: var(--uno-3); } // .    Weak
 
 .duo-1 { color: var(--duo-1); } // .... Strong
 .duo-2 { color: var(--duo-2); } // ...   |
@@ -11,7 +16,7 @@
 
 
 // Mixins -----------------------------------
-.punctuation-mixin(@color:@uno-4) {
+.punctuation-mixin(@color:var(--mono-4)) {
   .punctuation,
   .bracket,
   .brace {
@@ -28,26 +33,31 @@
 // this basically matches everything without a specific scope
 // so we put it first
 .meta {
-  .uno-4();
+  .mono-4();
 }
 
 .html.elements,
 .entity,
 .tag,
 .function-call {
-  .uno-1();
+  .mono-1();
 }
 
 .variable,
 .attribute-name,
 .character.escape {
-  .uno-2();
+  .mono-2();
 }
 
 .support {
-  .uno-3();
+  .mono-3();
 }
 
+// Uno hue -----------------------------------
+
+.variable {
+  .uno-1();
+}
 
 // Duo hue -----------------------------------
 .string,
@@ -68,7 +78,7 @@
 
 // Comments -----------------------------------
 .comment {
-  .uno-4();
+  .mono-4();
   font-style: italic;
 }
 
