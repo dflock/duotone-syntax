@@ -56,6 +56,8 @@ setColors = ->
   root.style.setProperty('--duo-2', _scaleDuo[1])
   root.style.setProperty('--duo-3', _scaleDuo[2])
 
+  root.style.setProperty('--accent', accent)
+
 # Unset Colors -----------------------
 unsetColors = ->
   root.style.removeProperty('--uno-1')
@@ -67,3 +69,5 @@ unsetColors = ->
   root.style.removeProperty('--duo-1')
   root.style.removeProperty('--duo-2')
   root.style.removeProperty('--duo-3')
+
+  root.style.removeProperty('--accent')
