@@ -5,29 +5,46 @@ root = document.documentElement
 
 hue = 240 # must be same as @syntax-hue
 
-high = 'hsl(240,99%,99%)'
-mid  = 'hsl(240,44%,66%)'
-low  = 'hsl(240,10%,44%)'
+contrast = 6
+accent = 'yellow'
+
 
 module.exports =
   activate: (state) ->
+    atom.config.observe 'duotone-syntax.contrast', (value) ->
+      setContrast(value)
+      setColors()
+
     atom.config.observe 'duotone-syntax.accentColor', (value) ->
-      setColors(value)
+      setAccent(value)
+      setColors()
 
   deactivate: ->
     unsetColors()
 
 
+# Set Contrast -----------------------
+setContrast = (value) ->
+  contrast = value / 10 # 0 - 1
+
+
+# Set Accent -----------------------
+setAccent = (value) ->
+  accent  = value.toHexString()
+
 # Set Colors -----------------------
-setColors = (accentColor) ->
+setColors = ->
   unsetColors() # prevents adding endless properties
 
-  # get new accent color
-  _duo  = accentColor.toHexString()
+  # Contrast
+  _high = chroma('hsl(240,99%,88%)').brighten(contrast)
+  _mid  = chroma('hsl(240,44%,66%)').brighten(contrast)
+  _low  = chroma('hsl(240,11%,33%)').brighten(contrast)
+  _accent = chroma(accent).brighten(contrast)
 
   # Color scale accent with bg
-  _scaleUno = chroma.scale([high, mid, low]).colors(5)
-  _scaleDuo = chroma.scale([     _duo, low]).colors(4)
+  _scaleUno = chroma.scale([_high, _mid, _low]).colors(5)
+  _scaleDuo = chroma.scale([    _accent, _low]).colors(4)
 
   root.style.setProperty('--uno-1', _scaleUno[0])
   root.style.setProperty('--uno-2', _scaleUno[1])

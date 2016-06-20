@@ -19,9 +19,18 @@
   "configSchema": {
     "accentColor": {
       "title": "Accent Color",
-      "description": "Change the accent color of this theme.",
+      "description": "Change the accent color.",
       "type": "color",
       "default": "yellow"
+    },
+    "contrast": {
+      "title": "Contrast",
+      "description": "Change the contrast.",
+      "type": [
+        "integer"
+      ],
+      "enum": [10, 8, 6, 4, 2, 0],
+      "default": "6"
     }
   }
 }
