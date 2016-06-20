@@ -44,7 +44,7 @@ setColors = ->
 
   # Color scale accent with bg
   _scaleUno = chroma.scale([_high, _mid, _low]).colors(5)
-  _scaleDuo = chroma.scale([    _accent, _low]).colors(4)
+  _scaleDuo = chroma.scale([    _accent, _low]).padding([0, 0.25]).colors(3)
 
   root.style.setProperty('--uno-1', _scaleUno[0])
   root.style.setProperty('--uno-2', _scaleUno[1])
