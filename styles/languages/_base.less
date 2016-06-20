@@ -12,11 +12,11 @@
 
 
 // Mixins -----------------------------------
-.punctuation-mixin(@color:var(--mono-4)) {
+.punctuation-mixin() {
   .punctuation,
   .bracket,
   .brace {
-    color: @color;
+    .uno-5();
   }
   .string .punctuation {
     .duo-3();
@@ -41,7 +41,7 @@
 
 .attribute-name,
 .character.escape {
-  .uno-2();
+  .uno-3();
 }
 
 .support {
