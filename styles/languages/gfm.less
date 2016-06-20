@@ -1,20 +1,20 @@
 // GF MarkDown
 
 .gfm {
-  .mono-1();
+  .uno-1();
   .punctuation-mixin();
 
   .link {
-    .mono-2();
+    .uno-2();
   }
 
   &.markup {
-    .mono-2();
+    .uno-2();
 
     &.bold   { .bold(); }
     &.italic { .italic(); }
     &.strike {
-      .mono-4();
+      .uno-5();
       text-decoration: line-through;
     }
 
@@ -24,14 +24,14 @@
 
     &.raw .support,
     &.code .support {
-      .mono-4(); // Fenced code blocks
+      .uno-5(); // Fenced code blocks
     }
   }
 
   &.comment  {
-    .mono-4();
+    .uno-5();
     &.quote {
-      .mono-2();
+      .uno-2();
     }
   }
 
@@ -40,7 +40,7 @@
 
     .border,
     .pipe {
-      .mono-4();
+      .uno-5();
     }
   }
 

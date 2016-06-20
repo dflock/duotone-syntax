@@ -1,14 +1,10 @@
 // Language syntax highlighting
 
-.mono-1 { color: var(--mono-1); } // .... Strong
-.mono-2 { color: var(--mono-2); } // ...   |
-.mono-3 { color: var(--mono-3); } // ..    v
-.mono-4 { color: var(--mono-4); } // .    Weak
-
 .uno-1 { color: var(--uno-1); } // .... Strong
 .uno-2 { color: var(--uno-2); } // ...   |
-.uno-3 { color: var(--uno-3); } // ..    v
-.uno-4 { color: var(--uno-3); } // .    Weak
+.uno-3 { color: var(--uno-3); } // ..    |
+.uno-4 { color: var(--uno-4); } // .     |
+.uno-5 { color: var(--uno-5); } // .    Weak
 
 .duo-1 { color: var(--duo-1); } // .... Strong
 .duo-2 { color: var(--duo-2); } // ...   |
@@ -33,30 +29,29 @@
 // this basically matches everything without a specific scope
 // so we put it first
 .meta {
-  .mono-4();
+  .uno-5();
 }
 
 .html.elements,
 .entity,
 .tag,
 .function-call {
-  .mono-1();
+  .uno-1();
 }
 
-.variable,
 .attribute-name,
 .character.escape {
-  .mono-2();
+  .uno-2();
 }
 
 .support {
-  .mono-3();
+  .uno-4();
 }
 
 // Uno hue -----------------------------------
 
 .variable {
-  .uno-1();
+  .uno-3();
 }
 
 // Duo hue -----------------------------------
@@ -78,7 +73,7 @@
 
 // Comments -----------------------------------
 .comment {
-  .mono-4();
+  .uno-5();
   font-style: italic;
 }
 
