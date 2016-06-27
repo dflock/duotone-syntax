@@ -25,7 +25,7 @@ module.exports =
 
 # Set Contrast -----------------------
 setContrast = (value) ->
-  contrast = value / 10
+  contrast = value / 12
 
 
 # Set Accent -----------------------
@@ -37,10 +37,10 @@ setColors = ->
   unsetColors() # prevents adding endless properties
 
   # Contrast
-  _high = chroma('hsl(240,99%,88%)').brighten(contrast)
-  _mid  = chroma('hsl(240,33%,66%)').brighten(contrast)
-  _low  = chroma('hsl(240,11%,33%)').brighten(contrast)
-  _accent = chroma(accent).brighten(contrast)
+  _high = chroma('hsl(240,99%,88%)').brighten(contrast).saturate(contrast)
+  _mid  = chroma('hsl(240,28%,66%)').brighten(contrast).saturate(contrast)
+  _low  = chroma('hsl(240,11%,36%)').brighten(contrast)
+  _accent = chroma(accent).brighten(contrast).saturate(contrast)
 
   # Color scale accent with bg
   _scaleUno = chroma.scale([ _high, _mid, _low]).colors(5)
