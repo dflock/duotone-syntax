@@ -29,8 +29,8 @@
       "type": [
         "integer"
       ],
-      "enum": [10, 8, 6, 4, 2, 0],
-      "default": "6"
+      "enum": [5, 4, 3, 2, 1],
+      "default": "3"
     }
   }
 }
