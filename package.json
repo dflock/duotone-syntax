@@ -17,15 +17,24 @@
     "chroma-js": "1.1.1"
   },
   "configSchema": {
-    "accentColor": {
-      "title": "Accent Color",
+    "unoColor": {
+      "title": "Uno",
+      "description": "Change the main hue.",
+      "order": 1,
+      "type": "color",
+      "default": "blue"
+    },
+    "duoColor": {
+      "title": "Duo",
       "description": "Change the accent color.",
+      "order": 2,
       "type": "color",
       "default": "yellow"
     },
     "contrast": {
       "title": "Contrast",
       "description": "Change the contrast.",
+      "order": 3,
       "type": [
         "integer"
       ],
