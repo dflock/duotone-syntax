@@ -4,15 +4,22 @@ root = document.documentElement
 # Colors -----------------------
 
 hue = 240 # must be same as @syntax-hue
+preset = 1
 
 uno = 'blue'
 unoHue = 240
 duo = 'yellow'
-contrast = 3
+
+saturation = 0
+brightness = 0
 
 
 module.exports =
   activate: (state) ->
+    atom.config.observe 'duotone-syntax.preset', (value) ->
+      setPreset(value)
+      setColors()
+
     atom.config.observe 'duotone-syntax.unoColor', (value) ->
       setUnoColor(value)
       setColors()
@@ -21,43 +28,37 @@ module.exports =
       setDuoColor(value)
       setColors()
 
-    atom.config.observe 'duotone-syntax.contrast', (value) ->
-      setContrast(value)
-      setColors()
-
-
   deactivate: ->
     unsetColors()
 
 
+
+# Set Preset -----------------------
+setPreset = (value) ->
+  preset = value
+
 # Set Uno Color -----------------------
 setUnoColor = (value) ->
-  _uno = value.toHexString()
-  uno = _uno
-  unoHue  = chroma(_uno).get('hsl.h')
+  uno = value.toHexString()
 
 # Set Duo Color -----------------------
 setDuoColor = (value) ->
   duo  = value.toHexString()
 
-# Set Contrast -----------------------
-setContrast = (value) ->
-  contrast = value / 8
 
 
 # Set Colors -----------------------
 setColors = ->
   unsetColors() # prevents adding endless properties
 
-  # Contrast
-  _high = chroma.hsl(unoHue,.99,.88).brighten(contrast).saturate(contrast)
+  # Color limits
+  _high = chroma.mix('hsl(0,0%,100%)', uno, 0.5);
   _mid  = uno
-  _low  = chroma.hsl(unoHue,.11,.24).brighten(contrast)
-  _duo  = chroma(duo).brighten(contrast).saturate(contrast)
+  _low  = chroma.mix('hsl(0,0%,25%)', uno, 0.25);
 
-  # Color scale accent with bg
+  # Color scales
   _scaleUno = chroma.scale([ _high, _mid, _low]).colors(5)
-  _scaleDuo = chroma.scale([ _duo, _low]).padding([0, 0.25]).colors(3)
+  _scaleDuo = chroma.scale([ duo, _low]).padding([0, 0.33]).colors(3)
 
   root.style.setProperty('--uno-1', _scaleUno[0])
   root.style.setProperty('--uno-2', _scaleUno[1])

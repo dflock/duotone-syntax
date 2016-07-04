@@ -17,29 +17,29 @@
     "chroma-js": "1.1.1"
   },
   "configSchema": {
+    "preset": {
+      "title": "Color presets",
+      "description": "Choose one of the presets.",
+      "order": 1,
+      "type": [
+        "string"
+      ],
+      "enum": ["Default", "Dark Sea", "Dark Space", "Dark Forest", "Dark Earth"],
+      "default": "Default"
+    },
     "unoColor": {
       "title": "Uno",
-      "description": "Change the main hue.",
-      "order": 1,
+      "description": "Or customize the main hue..",
+      "order": 2,
       "type": "color",
-      "default": "blue"
+      "default": "#7486FD"
     },
     "duoColor": {
       "title": "Duo",
-      "description": "Change the accent color.",
-      "order": 2,
-      "type": "color",
-      "default": "yellow"
-    },
-    "contrast": {
-      "title": "Contrast",
-      "description": "Change the contrast.",
+      "description": "and the accent color.",
       "order": 3,
-      "type": [
-        "integer"
-      ],
-      "enum": [5, 4, 3, 2, 1],
-      "default": "3"
+      "type": "color",
+      "default": "#FF3963"
     }
   }
 }
