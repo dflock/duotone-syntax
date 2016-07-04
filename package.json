@@ -40,6 +40,13 @@
       "order": 3,
       "type": "color",
       "default": "#FF3963"
+    },
+    "bgColor": {
+      "title": "Background color",
+      "description": "Also color the background. Note: This might break the unified look of your UI theme.",
+      "order": 4,
+      "type": "boolean",
+      "default": false
     }
   }
 }

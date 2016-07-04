@@ -3,6 +3,13 @@
 
 // CSS Custom Properties -----------------------------------
 
+:root {
+  --guide: @syntax-guide;
+  --selection: @syntax-selection;
+  --cursor-line: @syntax-cursor-line;
+  --bg: @syntax-background-color;
+}
+
 
 // Tests -----------------------------------
 
@@ -26,6 +33,19 @@
     border-radius: 4em;
     &::-webkit-color-swatch {
       border-radius: inherit;
+    }
+  }
+  label[for="duotone-syntax.bgColor"] {
+    display: none;
+  & + .setting-description {
+    display: none;
+  }
+
+    .theme-one-dark-ui & {
+      display: block;
+      & + .setting-description {
+        display: block;
+      }
     }
   }
 }

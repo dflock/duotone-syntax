@@ -10,8 +10,7 @@ uno = 'blue'
 unoHue = 240
 duo = 'yellow'
 
-saturation = 0
-brightness = 0
+bgColor = false
 
 
 module.exports =
@@ -26,6 +25,10 @@ module.exports =
 
     atom.config.observe 'duotone-syntax.duoColor', (value) ->
       setDuoColor(value)
+      setColors()
+
+    atom.config.observe 'duotone-syntax.bgColor', (value) ->
+      setBgColor(value)
       setColors()
 
   deactivate: ->
@@ -43,7 +46,11 @@ setUnoColor = (value) ->
 
 # Set Duo Color -----------------------
 setDuoColor = (value) ->
-  duo  = value.toHexString()
+  duo = value.toHexString()
+
+# Set Background Color -----------------------
+setBgColor = (value) ->
+  bgColor = value
 
 
 
@@ -52,9 +59,9 @@ setColors = ->
   unsetColors() # prevents adding endless properties
 
   # Color limits
-  _high = chroma.mix('hsl(0,0%,100%)', uno, 0.5);
+  _high = chroma.mix('hsl(0,0%,100%)', uno, 0.5)
   _mid  = uno
-  _low  = chroma.mix('hsl(0,0%,25%)', uno, 0.25);
+  _low  = chroma.mix('hsl(0,0%,25%)', uno, 0.25)
 
   # Color scales
   _scaleUno = chroma.scale([ _high, _mid, _low]).colors(5)
@@ -72,6 +79,19 @@ setColors = ->
 
   root.style.setProperty('--accent', duo)
 
+  # Background
+  _bg = _low
+  console.log chroma(uno).temperature()
+  if chroma(uno).temperature() < 4000
+      _bg = chroma(_low).darken(.5).desaturate(2) # less saturation for warm colors
+
+  root.style.setProperty('--guide',  chroma.mix('hsl(0,0%,12%)', _bg, 0.5) )
+
+  if bgColor
+    root.style.setProperty('--selection',   chroma.mix('hsl(0,0%,20%)', _bg, 0.33) )
+    root.style.setProperty('--cursor-line', chroma.mix('hsl(0,0%,12%)', _bg, 0.33) )
+    root.style.setProperty('--bg',          chroma.mix('hsl(0,0%,12%)', _bg, 0.25) )
+
 
 # Unset Colors -----------------------
 unsetColors = ->
@@ -86,3 +106,8 @@ unsetColors = ->
   root.style.removeProperty('--duo-3')
 
   root.style.removeProperty('--accent')
+
+  root.style.removeProperty('--guide')
+  root.style.removeProperty('--selection')
+  root.style.removeProperty('--cursor-line')
+  root.style.removeProperty('--bg')

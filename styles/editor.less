@@ -3,15 +3,15 @@
 
 atom-text-editor,
 :host {
-  color: @syntax-text-color;
-  background-color: @syntax-background-color;
+  color: var(--uno-2);
+  background-color: var(--bg);
 
   .line.cursor-line {
-    background-color: @syntax-cursor-line;
+    background-color: var(--cursor-line);
   }
 
   .invisible {
-    color: @syntax-text-color;
+    color: inherit;
   }
 
   .cursor {
@@ -20,7 +20,7 @@ atom-text-editor,
   }
 
   .selection .region {
-    background-color: @syntax-selection-color;
+    background-color: var(--selection);
   }
 
   .bracket-matcher .region {
@@ -28,37 +28,37 @@ atom-text-editor,
   }
 
   .invisible-character {
-    color: @syntax-invisible-character-color;
+    color: var(--guide);
     -webkit-font-smoothing: antialiased;
   }
 
   .indent-guide {
-    color: @syntax-indent-guide-color;
+    color: var(--guide);
   }
 
   .wrap-guide {
-    background-color: @syntax-wrap-guide-color;
+    background-color: var(--guide);
   }
 
   // find + replace
   .find-result .region.region.region,
   .current-result .region.region.region {
     border-radius: 0px;
-    background-color: @syntax-result-marker-color;
+    background-color: hsla(0,0%,100%,.1);
     transition: border-color .4s;
   }
   .find-result .region.region.region {
     border: 2px solid transparent;
   }
   .current-result .region.region.region {
-    border: 2px solid @syntax-result-marker-color-selected;
+    border: 2px solid var(--accent);
     transition-duration: .1s;
   }
 
   .gutter {
 
     .line-number {
-      color: @syntax-gutter-text-color;
+      color: var(--uno-5);
       -webkit-font-smoothing: antialiased;
 
       &.git-line-removed:before {
@@ -75,8 +75,8 @@ atom-text-editor,
       }
 
       &.cursor-line {
-        color: @syntax-gutter-text-color-selected;
-        background-color: @syntax-gutter-background-color-selected;
+        color: var(--uno-3);
+        background-color: var(--cursor-line);
       }
 
       &.cursor-line-no-selection {
@@ -84,7 +84,7 @@ atom-text-editor,
       }
 
       .icon-right {
-        color: @syntax-text-color;
+        color: var(--uno-3);
       }
     }
   }
@@ -92,6 +92,23 @@ atom-text-editor,
   .gutter .line-number.folded,
   .gutter .line-number:after,
   .fold-marker:after {
-    color: @syntax-gutter-text-color-selected;
+    color: var(--uno-3);
+  }
+}
+
+//
+// Seamless tabs
+// --------------------------------
+// This overrides the active tab color of the One dark UI theme.
+
+.theme-one-dark-ui .tab-bar .tab.active {
+  &[data-type$="Editor"] {
+    background-color: var(--bg);
+    &::after {
+      border-bottom-color: var(--bg);
+    }
+    .title {
+      background-color: var(--bg);
+    }
   }
 }
