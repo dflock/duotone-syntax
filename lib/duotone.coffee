@@ -1,83 +1,75 @@
 chroma = require 'chroma-js'
 
 root = document.documentElement
-presetEl = document.getElementById('duotone-syntax.preset')
-colorEl = document.querySelector('.settings-view .color')
-isPreset = false
+uno = ''
+duo = ''
 
 module.exports =
   activate: (state) ->
 
-    # Init
-    setColors()
-
     # Change Preset
-    atom.config.onDidChange 'duotone-syntax.preset', ({newValue, oldValue}) ->
-      isPreset = true
+    atom.config.observe 'duotone-syntax.preset', (newValue) ->
+      root.classList.remove('theme-duotone-syntax--custom-colors')
       switch newValue
         when "Dark Sky"
-          atom.config.set('duotone-syntax.unoColor', 'purple')
-          atom.config.set('duotone-syntax.duoColor', 'yellow')
+          uno = '#ff0000'
+          duo = '#00ff00'
         when "Dark Sea"
-          atom.config.set('duotone-syntax.unoColor', 'blue')
-          atom.config.set('duotone-syntax.duoColor', 'green')
+          uno = '#0000ff'
+          duo = '#ff0000'
         when "Dark Space"
-          atom.config.set('duotone-syntax.unoColor', 'purple')
-          atom.config.set('duotone-syntax.duoColor', 'red')
+          uno = '#00ff00'
+          duo = '#0000ff'
         when "Dark Forest"
-          atom.config.set('duotone-syntax.unoColor', 'green')
-          atom.config.set('duotone-syntax.duoColor', 'yellow')
+          uno = '#ff0000'
+          duo = '#00ff00'
         when "Dark Earth"
-          atom.config.set('duotone-syntax.unoColor', 'brown')
-          atom.config.set('duotone-syntax.duoColor', 'orange')
+          uno = '#0000ff'
+          duo = '#ff0000'
+        when "Custom"
+          root.classList.add('theme-duotone-syntax--custom-colors')
+          uno = atom.config.get('duotone-syntax.unoColor').toHexString()
+          duo = atom.config.get('duotone-syntax.duoColor').toHexString()
+      setColors()
 
     # Change Uno
     atom.config.onDidChange 'duotone-syntax.unoColor', ({newValue, oldValue}) ->
+      uno = newValue.toHexString()
       setColors()
 
     # Change Duo
     atom.config.onDidChange 'duotone-syntax.duoColor', ({newValue, oldValue}) ->
+      duo = newValue.toHexString()
       setColors()
 
   deactivate: ->
+    root.classList.remove('theme-duotone-syntax--custom-colors')
     unsetColors()
 
 # Apply Colors -----------------------
-# setCustomLabel = ->
-#   console.log 'setColors'
-
-# Apply Colors -----------------------
 setColors = ->
+  unsetColors() # prevents adding endless properties
 
-  if isPreset
-    isPreset = false
-  else
-    console.log 'setColors'
-    unsetColors() # prevents adding endless properties
+  # Color limits
+  _high = chroma.mix('hsl(0,0%,100%)', uno, 0.5);
+  _mid  = uno
+  _low  = chroma.mix('hsl(0,0%,25%)', uno, 0.25);
 
-    _uno = atom.config.get('duotone-syntax.unoColor').toHexString()
-    _duo = atom.config.get('duotone-syntax.duoColor').toHexString()
+  # Color scales
+  _scaleUno = chroma.scale([ _high, _mid, _low]).colors(5)
+  _scaleDuo = chroma.scale([ duo, _low]).padding([0, 0.33]).colors(3)
 
-    # Color limits
-    _high = chroma.mix('hsl(0,0%,100%)', _uno, 0.5);
-    _mid  = _uno
-    _low  = chroma.mix('hsl(0,0%,25%)', _duo, 0.25);
+  root.style.setProperty('--uno-1', _scaleUno[0])
+  root.style.setProperty('--uno-2', _scaleUno[1])
+  root.style.setProperty('--uno-3', _scaleUno[2])
+  root.style.setProperty('--uno-4', _scaleUno[3])
+  root.style.setProperty('--uno-5', _scaleUno[4])
 
-    # Color scales
-    _scaleUno = chroma.scale([ _high, _mid, _low]).colors(5)
-    _scaleDuo = chroma.scale([ _duo, _low]).padding([0, 0.33]).colors(3)
+  root.style.setProperty('--duo-1', _scaleDuo[0])
+  root.style.setProperty('--duo-2', _scaleDuo[1])
+  root.style.setProperty('--duo-3', _scaleDuo[2])
 
-    root.style.setProperty('--uno-1', _scaleUno[0])
-    root.style.setProperty('--uno-2', _scaleUno[1])
-    root.style.setProperty('--uno-3', _scaleUno[2])
-    root.style.setProperty('--uno-4', _scaleUno[3])
-    root.style.setProperty('--uno-5', _scaleUno[4])
-
-    root.style.setProperty('--duo-1', _scaleDuo[0])
-    root.style.setProperty('--duo-2', _scaleDuo[1])
-    root.style.setProperty('--duo-3', _scaleDuo[2])
-
-    root.style.setProperty('--accent', _duo)
+  root.style.setProperty('--accent', duo)
 
 
 # Unset Colors -----------------------

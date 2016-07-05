@@ -18,18 +18,18 @@
   },
   "configSchema": {
     "preset": {
-      "title": "Color presets",
+      "title": "Color palette",
       "description": "Choose one of the presets.",
       "order": 1,
       "type": [
         "string"
       ],
-      "enum": ["Dark Sky", "Dark Sea", "Dark Space", "Dark Forest", "Dark Earth"],
+      "enum": ["Dark Sky", "Dark Sea", "Dark Space", "Dark Forest", "Dark Earth", "Custom"],
       "default": "Dark Sky"
     },
     "unoColor": {
       "title": "Uno",
-      "description": "Or customize the main hue..",
+      "description": "Or customize the main..",
       "order": 2,
       "type": "color",
       "default": "#7486FD"
