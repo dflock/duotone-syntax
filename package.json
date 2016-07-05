@@ -24,8 +24,8 @@
       "type": [
         "string"
       ],
-      "enum": ["Default", "Dark Sea", "Dark Space", "Dark Forest", "Dark Earth"],
-      "default": "Default"
+      "enum": ["Dark Sky", "Dark Sea", "Dark Space", "Dark Forest", "Dark Earth"],
+      "default": "Dark Sky"
     },
     "unoColor": {
       "title": "Uno",
